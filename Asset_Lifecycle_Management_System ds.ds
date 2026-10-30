@@ -1,0 +1,3672 @@
+/*
+ * Author       : avinaash.m.2024.mech_raja544
+ * Generated on : 31-Oct-2026 00:12:00
+ * Version      : 1.0
+ */
+ application "Asset Lifecycle Management System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form asset
+		{
+			displayname = "Asset"
+			success message = "Asset Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			asset_id
+			(
+    			type = autonumber
+				displayname = "Asset ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			asset_name
+			(
+    			type = text
+				displayname = "Asset Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			category
+			(
+				type = list	
+				displayname = "Category"
+				values  = asset_category.ID
+    			displayformat = [category_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			serial_number
+			(
+    			type = text
+				displayname = "Serial Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			vendor
+			(
+				type = list	
+				displayname = "Vendor"
+				values  = vendor.ID
+    			displayformat = [vendor_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			location
+			(
+				type = picklist
+				displayname = "Location"
+				values = {"Thermal Lab","Materials Testing Lab","Metrology Lab","Machine Shop","CAD-CAM Lab","Welding Shop"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			purchase_date
+			(
+    			type = date
+				displayname = "Purchase Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			purchase_cost
+			(
+				displayname = "Purchase Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			warranty_expiry
+			(
+    			type = date
+				displayname = "Warranty Expiry"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			asset_condition
+			(
+				type = picklist
+				displayname = "Asset Condition"
+				values = {"Excellent","Poor","Fair","Good"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			asset_status
+			(
+				type = picklist
+				displayname = "Asset Status"
+				values = {"In Use","Under Maintenance","In Stock","Disposed"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			asset_tag
+			(
+    			type = text
+				displayname = "Asset Tag"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			remarks
+			(
+    			type = textarea
+				displayname = "Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form asset_allocation
+		{
+			displayname = "Asset Allocation"
+			success message = "Asset Allocation Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			asset
+			(
+				type = list	
+				displayname = "Asset"
+				values  = asset.ID
+    			displayformat = [asset_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			allocated_to
+			(
+    			type = text
+				displayname = "Allocated To"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			lab_section
+			(
+    			type = text
+				displayname = "Lab Section"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			issue_date
+			(
+    			type = date
+				displayname = "Issue Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			expected_return_date
+			(
+    			type = date
+				displayname = "Expected Return Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			actual_return_date
+			(
+    			type = date
+				displayname = "Actual Return Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			allocation_status
+			(
+				type = radiobuttons
+				displayname = "Allocation Status"
+				values = {"Returned","Issued"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			condition_on_return
+			(
+    			type = text
+				displayname = "Condition On Return"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			receiver_signature
+			(
+    			type = textarea
+				displayname = "Receiver Signature"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form asset_category
+		{
+			displayname = "Asset Category"
+			success message = "Asset Category Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			category_name
+			(
+    			type = text
+				displayname = "Category Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			depreciation_rate
+			(
+    			type = percentage
+				displayname = "Depreciation Rate"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			useful_life
+			(
+				type = number
+				displayname = "Useful Life"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			description
+			(
+    			type = textarea
+				displayname = "Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			is_active
+			(
+    			type = checkbox
+				displayname = "Is Active"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form asset_disposal
+		{
+			displayname = "Asset Disposal"
+			success message = "Asset Disposal Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			asset
+			(
+				type = list	
+				displayname = "Asset"
+				values  = asset.ID
+    			displayformat = [asset_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			reason
+			(
+				type = picklist
+				displayname = "Reason"
+				values = {"Lost","Obsolete","Replaced","Beyond Repair"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			disposal_method
+			(
+				type = picklist
+				displayname = "Disposal Method"
+				values = {"Auction","Scrap Sale","Donation","Recycle"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			book_value
+			(
+				displayname = "Book Value"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			expected_scrap_value
+			(
+				displayname = "Expected Scrap Value"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			disposal_date
+			(
+    			type = date
+				displayname = "Disposal Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			condition_report
+			(
+    			type = url
+				displayname = "Condition Report"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			approval_status
+			(
+				type = picklist
+				displayname = "Approval Status"
+				values = {"Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			remarks
+			(
+    			type = textarea
+				displayname = "Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form asset_request
+		{
+			displayname = "Asset Request"
+			success message = "Asset Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			requested_by
+			(
+    			type = text
+				displayname = "Requested By"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			lab_section
+			(
+    			type = text
+				displayname = "Lab Section"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			category
+			(
+				type = list	
+				displayname = "Category"
+				values  = asset_category.ID
+    			displayformat = [category_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			item_description
+			(
+    			type = textarea
+				displayname = "Item Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			quantity
+			(
+				type = number
+				displayname = "Quantity"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			estimated_unit_cost
+			(
+				displayname = "Estimated Unit Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			priority
+			(
+				type = picklist
+				displayname = "Priority"
+				values = {"High","Low","Medium"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			required_by
+			(
+    			type = date
+				displayname = "Required By"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_vendor
+			(
+				type = list	
+				displayname = "Preferred Vendor"
+				values  = vendor.ID
+    			displayformat = [vendor_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			justification
+			(
+    			type = textarea
+				displayname = "Justification"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			quotation
+			(
+    			type = url
+				displayname = "Quotation"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			approval_status
+			(
+				type = picklist
+				displayname = "Approval Status"
+				values = {"Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			rejection_reason
+			(
+    			type = textarea
+				displayname = "Rejection Reason"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form maintenance_record
+		{
+			displayname = "Maintenance Record"
+			success message = "Maintenance Record Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			asset
+			(
+				type = list	
+				displayname = "Asset"
+				values  = asset.ID
+    			displayformat = [asset_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			schedule
+			(
+				type = list	
+				displayname = "Schedule"
+				values  = maintenance_schedule.ID
+    			displayformat = [schedule_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			maintenance_type
+			(
+				type = radiobuttons
+				displayname = "Maintenance Type"
+				values = {"Preventive","Breakdown"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			fault_description
+			(
+    			type = textarea
+				displayname = "Fault Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			technician
+			(
+    			type = text
+				displayname = "Technician"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_date
+			(
+    			type = date
+				displayname = "Job Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			downtime_hours
+			(
+				type = number
+				displayname = "Downtime Hours"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			labour_cost
+			(
+				displayname = "Labour Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			parts_cost
+			(
+				displayname = "Parts Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			total_cost
+			(
+				displayname = "Total Cost"
+				type = USD
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_status
+			(
+				type = picklist
+				displayname = "Job Status"
+				values = {"Completed","In Progress","Open"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			job_report
+			(
+    			type = url
+				displayname = "Job Report"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			approval_status
+			(
+				type = picklist
+				displayname = "Approval Status"
+				values = {"Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form maintenance_schedule
+		{
+			displayname = "Maintenance Schedule"
+			success message = "Maintenance Schedule Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			schedule_id
+			(
+    			type = autonumber
+				displayname = "Schedule ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			asset
+			(
+				type = list	
+				displayname = "Asset"
+				values  = asset.ID
+    			displayformat = [asset_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			maintenance_type
+			(
+				type = picklist
+				displayname = "Maintenance Type"
+				values = {"Inspection","Overhaul","Lubrication","Calibration","Servicing"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			frequency
+			(
+				type = picklist
+				displayname = "Frequency"
+				values = {"Monthly","Weekly","Half-Yearly","Yearly","Quarterly"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			interval_days
+			(
+				type = number
+				displayname = "Interval in Days"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			last_done_date
+			(
+    			type = date
+				displayname = "Last Done Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			next_due_date
+			(
+    			type = date
+				displayname = "Next Due Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_technician
+			(
+    			type = text
+				displayname = "Assigned Technician"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			schedule_status
+			(
+				type = picklist
+				displayname = "Schedule Status"
+				values = {"Active","Closed","Paused"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			instructions
+			(
+    			type = textarea
+				displayname = "Instructions"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form vendor
+		{
+			displayname = "Vendor"
+			success message = "Vendor Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			vendor_name
+			(
+    			type = text
+				displayname = "Vendor Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_person
+			(
+    			type = name
+				displayname = "Contact Person"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email
+			(
+    			type = email
+				displayname = "Email Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			phone
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			gst_number
+			(
+    			type = text
+				displayname = "GST Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			address
+			(
+    			type = address
+				displayname = "Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+	     			 visibility = false
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+	     			 visibility = false
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+	     			 visibility = false
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+	     			 visibility = false
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+	     			 visibility = false
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "Latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "Longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			vendor_rating
+			(
+				type = picklist
+				displayname = "Vendor Rating"
+				values = {"Excellent","Poor","Average","Good"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		list asset_Report
+		{
+			displayName = "All Assets"
+			show all rows from asset    
+			(
+				asset_id as "Asset ID"
+				asset_name as "Asset Name"
+				category as "Category"
+				serial_number as "Serial Number"
+				vendor as "Vendor"
+				location as "Location"
+				purchase_date as "Purchase Date"
+				purchase_cost as "Purchase Cost"
+				(
+					display = total,average,min,max	
+				)
+				warranty_expiry as "Warranty Expiry"
+				asset_condition as "Asset Condition"
+				asset_status as "Asset Status"
+				asset_tag as "Asset Tag"
+				remarks as "Remarks"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (asset_condition == "Excellent")
+				fields = [asset_condition]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (asset_condition == "Fair")
+				fields = [asset_condition]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (asset_condition == "Good")
+				fields = [asset_condition]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+				"New Formatting4"
+				{
+				condition = (asset_condition == "Poor")
+				fields = [asset_condition]
+				format = "color:#ffffff;background-color:#3598db;"
+				}
+			)
+		}
+		kanban asset_by_location
+		{
+			displayName = "Locations"
+			show all rows from asset    
+			(
+				asset_id as "Asset ID"
+				asset_name as "Asset Name"
+				category as "Category"
+				serial_number as "Serial Number"
+				vendor as "Vendor"
+				location as "Location"
+				purchase_date as "Purchase Date"
+				purchase_cost as "Purchase Cost"
+				(
+					display = total,average,min,max	
+				)
+				warranty_expiry as "Warranty Expiry"
+				asset_condition as "Asset Condition"
+				asset_status as "Asset Status"
+				asset_tag as "Asset Tag"
+				remarks as "Remarks"
+			)
+			options
+			(
+	 			display field = location
+	 		)
+		}
+		list asset_request_Report
+		{
+			displayName = "All Asset Requests"
+			show all rows from asset_request    
+			(
+				requested_by as "Requested By"
+				lab_section as "Lab Section"
+				category as "Category"
+				item_description as "Item Description"
+				quantity as "Quantity"
+				estimated_unit_cost as "Estimated Unit Cost"
+				(
+					display = total,average,min,max	
+				)
+				priority as "Priority"
+				required_by as "Required By"
+				preferred_vendor as "Preferred Vendor"
+				justification as "Justification"
+				quotation as "Quotation"
+				approval_status as "Approval Status"
+				rejection_reason as "Rejection Reason"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (priority == "High")
+				fields = [priority]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (priority == "Low")
+				fields = [priority]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (priority == "Medium")
+				fields = [priority]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban asset_request_by_priority
+		{
+			displayName = "Priorities"
+			show all rows from asset_request    
+			(
+				requested_by as "Requested By"
+				lab_section as "Lab Section"
+				category as "Category"
+				item_description as "Item Description"
+				quantity as "Quantity"
+				estimated_unit_cost as "Estimated Unit Cost"
+				(
+					display = total,average,min,max	
+				)
+				priority as "Priority"
+				required_by as "Required By"
+				preferred_vendor as "Preferred Vendor"
+				justification as "Justification"
+				quotation as "Quotation"
+				approval_status as "Approval Status"
+				rejection_reason as "Rejection Reason"
+			)
+			options
+			(
+	 			display field = priority
+	 		)
+		}
+		list maintenance_record_Report
+		{
+			displayName = "All Maintenance Records"
+			show all rows from maintenance_record    
+			(
+				asset as "Asset"
+				schedule as "Schedule"
+				maintenance_type as "Maintenance Type"
+				fault_description as "Fault Description"
+				technician as "Technician"
+				job_date as "Job Date"
+				downtime_hours as "Downtime Hours"
+				labour_cost as "Labour Cost"
+				(
+					display = total,average,min,max	
+				)
+				parts_cost as "Parts Cost"
+				(
+					display = total,average,min,max	
+				)
+				total_cost as "Total Cost"
+				(
+					display = total,average,min,max	
+				)
+				job_status as "Job Status"
+				job_report as "Job Report"
+				approval_status as "Approval Status"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (job_status == "Completed")
+				fields = [job_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (job_status == "In Progress")
+				fields = [job_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban maintenance_record_by_job_status
+		{
+			displayName = "Job Statuses"
+			show all rows from maintenance_record    
+			(
+				asset as "Asset"
+				schedule as "Schedule"
+				maintenance_type as "Maintenance Type"
+				fault_description as "Fault Description"
+				technician as "Technician"
+				job_date as "Job Date"
+				downtime_hours as "Downtime Hours"
+				labour_cost as "Labour Cost"
+				(
+					display = total,average,min,max	
+				)
+				parts_cost as "Parts Cost"
+				(
+					display = total,average,min,max	
+				)
+				total_cost as "Total Cost"
+				(
+					display = total,average,min,max	
+				)
+				job_status as "Job Status"
+				job_report as "Job Report"
+				approval_status as "Approval Status"
+			)
+			options
+			(
+	 			display field = job_status
+	 		)
+		}
+		list asset_disposal_Report
+		{
+			displayName = "All Asset Disposals"
+			show all rows from asset_disposal    
+			(
+				asset as "Asset"
+				reason as "Reason"
+				disposal_method as "Disposal Method"
+				book_value as "Book Value"
+				(
+					display = total,average,min,max	
+				)
+				expected_scrap_value as "Expected Scrap Value"
+				(
+					display = total,average,min,max	
+				)
+				disposal_date as "Disposal Date"
+				condition_report as "Condition Report"
+				approval_status as "Approval Status"
+				remarks as "Remarks"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (reason == "Lost")
+				fields = [reason]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (reason == "Obsolete")
+				fields = [reason]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (reason == "Replaced")
+				fields = [reason]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban asset_disposal_by_reason
+		{
+			displayName = "Reasons"
+			show all rows from asset_disposal    
+			(
+				asset as "Asset"
+				reason as "Reason"
+				disposal_method as "Disposal Method"
+				book_value as "Book Value"
+				(
+					display = total,average,min,max	
+				)
+				expected_scrap_value as "Expected Scrap Value"
+				(
+					display = total,average,min,max	
+				)
+				disposal_date as "Disposal Date"
+				condition_report as "Condition Report"
+				approval_status as "Approval Status"
+				remarks as "Remarks"
+			)
+			options
+			(
+	 			display field = reason
+	 		)
+		}
+		list asset_allocation_Report
+		{
+			displayName = "All Asset Allocations"
+			show all rows from asset_allocation    
+			(
+				asset as "Asset"
+				allocated_to as "Allocated To"
+				lab_section as "Lab Section"
+				issue_date as "Issue Date"
+				expected_return_date as "Expected Return Date"
+				actual_return_date as "Actual Return Date"
+				allocation_status as "Allocation Status"
+				condition_on_return as "Condition On Return"
+				receiver_signature as "Receiver Signature"
+			)
+		}
+		list vendor_Report
+		{
+			displayName = "All Vendors"
+			show all rows from vendor    
+			(
+				vendor_name as "Vendor Name"
+				contact_person  as "Contact Person"
+				email as "Email Address"
+				phone as "Phone Number"
+				gst_number as "GST Number"
+				address  as "Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				vendor_rating as "Vendor Rating"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (vendor_rating == "Average")
+				fields = [vendor_rating]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (vendor_rating == "Excellent")
+				fields = [vendor_rating]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (vendor_rating == "Good")
+				fields = [vendor_rating]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+				"New Formatting4"
+				{
+				condition = (vendor_rating == "Poor")
+				fields = [vendor_rating]
+				format = "color:#ffffff;background-color:#3598db;"
+				}
+			)
+		}
+		kanban vendor_by_vendor_rating
+		{
+			displayName = "Vendor Ratings"
+			show all rows from vendor    
+			(
+				vendor_name as "Vendor Name"
+				contact_person  as "Contact Person"
+				email as "Email Address"
+				phone as "Phone Number"
+				gst_number as "GST Number"
+				address  as "Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				vendor_rating as "Vendor Rating"
+			)
+			options
+			(
+	 			display field = vendor_rating
+	 		)
+		}
+		list maintenance_schedule_Report
+		{
+			displayName = "All Maintenance Schedules"
+			show all rows from maintenance_schedule    
+			(
+				schedule_id as "Schedule ID"
+				asset as "Asset"
+				maintenance_type as "Maintenance Type"
+				frequency as "Frequency"
+				interval_days as "Interval in Days"
+				last_done_date as "Last Done Date"
+				next_due_date as "Next Due Date"
+				assigned_technician as "Assigned Technician"
+				schedule_status as "Schedule Status"
+				instructions as "Instructions"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (maintenance_type == "Calibration")
+				fields = [maintenance_type]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (maintenance_type == "Inspection")
+				fields = [maintenance_type]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (maintenance_type == "Lubrication")
+				fields = [maintenance_type]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban maintenance_schedule_by_maintenance_type
+		{
+			displayName = "Maintenance Types"
+			show all rows from maintenance_schedule    
+			(
+				schedule_id as "Schedule ID"
+				asset as "Asset"
+				maintenance_type as "Maintenance Type"
+				frequency as "Frequency"
+				interval_days as "Interval in Days"
+				last_done_date as "Last Done Date"
+				next_due_date as "Next Due Date"
+				assigned_technician as "Assigned Technician"
+				schedule_status as "Schedule Status"
+				instructions as "Instructions"
+			)
+			options
+			(
+	 			display field = maintenance_type
+	 		)
+		}
+		list asset_category_Report
+		{
+			displayName = "All Asset Categories"
+			show all rows from asset_category    
+			(
+				category_name as "Category Name"
+				depreciation_rate as "Depreciation Rate"
+				(
+					display = total,average,min,max	
+				)
+				useful_life as "Useful Life"
+				description as "Description"
+				is_active as "Is Active"
+			)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='75%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#5A3D9B'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.asset.purchase_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Purchase Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.asset_request.estimated_unit_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#E7E7E7'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Unit Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#9366F9'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#AF8CFF'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.maintenance_record.labour_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Labour Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'shopping-cash-register'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.maintenance_record.parts_cost.sum'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Parts Costs'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Grouped_Panel 1'\n \n\t\n\ttitle = 'Asset Status'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '17px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '24%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1ABE75'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'sport-cardio'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'asset_status == &quot;In Use&quot;'\n\t  value = 'thisapp.asset.asset_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'In Use'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '24%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#E2335C'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'tech-2-l-security'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'asset_status == &quot;Under Maintenance&quot;'\n\t  value = 'thisapp.asset.asset_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Under Maintenance'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1678F9'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'shopping-stock'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'asset_status == &quot;In Stock&quot;'\n\t  value = 'thisapp.asset.asset_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'In Stock'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '27%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#F6BC2B'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'envir-waste'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '20px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'asset_status == &quot;Disposed&quot;'\n\t  value = 'thisapp.asset.asset_status.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Disposed'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 1'\n \n\t\n\ttitle = 'Quick Links'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'asset'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Asset'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'asset_request'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Asset Request'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'maintenance_record'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Maintenance Record'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'asset_disposal'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Asset Disposal'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Depreciation Rate by Useful Life'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Scatter'\n\txtitle = 'Depreciation Rate'\n\tytitle = 'Useful Life'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'asset_category'\n\txfield = 'depreciation_rate'\n\tyfields = 'value:useful_life'\n\tgroupBy = 'category_name'\n\t\tDelugeCriteria = 'depreciation_rate is not null'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Book Value by Expected Scrap Value'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Scatter'\n\txtitle = 'Book Value'\n\tytitle = 'Expected Scrap Value'\n\tbgColor = '#FFFFFF'\n\ttheme = '#198391'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'asset_disposal'\n\txfield = 'book_value'\n\tyfields = 'value:expected_scrap_value'\n\tgroupBy = 'asset'\n\t\tDelugeCriteria = 'book_value is not null'\n/>\n\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'asset_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'custom'\n\theightValue = '500'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+
+		schedule
+		{
+			notify_technician_upcoming_maintenance as "Notify Technician for Upcoming Maintenance"
+			{
+				type =  schedule
+				form = maintenance_schedule
+					status = inactive
+				start = next_due_date at "10:00:00"
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Get the next due date from the input maintenance schedule record
+										nextDueDate = input.next_due_date;
+										// Calculate the date one week from now
+										oneWeekFromNow = nextDueDate.addDay(7);
+										// Calculate the date one week before the next due date
+										oneWeekBeforeDue = nextDueDate.addDay(-7);
+										// Check if the next due date is within the next week (between today and one week from now)
+										if(today >= oneWeekBeforeDue && today <= oneWeekFromNow)
+										{
+											// Get the assigned technician's email
+											technicianEmail = input.assigned_technician;
+											// Get the maintenance type
+											maintenanceType = input.maintenance_type;
+											// Get the asset name (accessing through multi_select_lookup)
+											assetName = "";
+											if(!input.asset.isNull())
+											{
+												for each  assetRecord in input.asset
+												{
+													assetName = assetRecord.asset_name;
+													break;
+												}
+											}
+											// Get the schedule ID
+											scheduleId = input.schedule_id;
+											// Send email to the technician
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :technicianEmail
+												subject :"Maintenance Due Soon - Schedule ID: " + scheduleId.toString()
+												message :"Dear Technician,\n\nThis is a reminder that the following maintenance is due next week:\n\nSchedule ID: " + scheduleId.toString() + "\nMaintenance Type: " + maintenanceType + "\nAsset: " + assetName + "\nDue Date: " + nextDueDate.toString() + "\n\nPlease prepare accordingly.\n\nBest regards,\nAsset Management System"
+											]
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Maintenance Supervisor"
+			{
+				name = "Maintenance Supervisor"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Create and manage maintenance schedules with specific frequencies \n"
+				ModulePermissions
+				{
+					maintenance_schedule
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							maintenance_schedule_by_maintenance_type={"View","Edit","Delete"}
+							maintenance_schedule_Report={"View","Edit","Delete"}
+						}
+					}
+					maintenance_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							maintenance_record_by_job_status={"View","Edit","Delete"}
+							maintenance_record_Report={"View","Edit","Delete"}
+						}
+					}
+					asset
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_Report={"View","Edit"}
+							asset_by_location={"View","Edit"}
+						}
+					}
+				}
+			}
+			"Asset Administrator"
+			{
+				name = "Asset Administrator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Define asset categories, depreciation rates, and useful life parameters \n"
+				ModulePermissions
+				{
+					asset
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_Report={"View","Edit","Delete"}
+							asset_by_location={"View","Edit","Delete"}
+						}
+					}
+					asset_category
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_category_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Lab Manager"
+			{
+				name = "Lab Manager"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Request new assets and allocate existing equipment to specific labs \n"
+				ModulePermissions
+				{
+					asset
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_Report={"View","Edit"}
+							asset_by_location={"View","Edit"}
+						}
+					}
+					asset_allocation
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_allocation_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Procurement Officer"
+			{
+				name = "Procurement Officer"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Review and approve asset requests based on budget and priority \n"
+				ModulePermissions
+				{
+					asset_request
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_request_Report={"View","Edit","Delete"}
+							asset_request_by_priority={"View","Edit","Delete"}
+						}
+					}
+					vendor
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							vendor_Report={"View","Edit"}
+							vendor_by_vendor_rating={"View","Edit"}
+						}
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Vendor Representative"
+			{
+				name = "Vendor Representative"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Provide quotations and product specifications for asset requests \n"
+				ModulePermissions
+				{
+					asset_request
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_request_Report={"View"}
+							asset_request_by_priority={"View"}
+						}
+					}
+					vendor
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							vendor_Report={"View","Edit","Delete"}
+							vendor_by_vendor_rating={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Technician"
+			{
+				name = "Technician"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Execute scheduled maintenance tasks and record fault descriptions \n"
+				ModulePermissions
+				{
+					asset
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							asset_Report={"View","Edit"}
+							asset_by_location={"View","Edit"}
+						}
+					}
+					maintenance_record
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							maintenance_record_by_job_status={"View","Edit","Delete"}
+							maintenance_record_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form asset
+			{
+				label placement = left
+			}
+			form asset_allocation
+			{
+				label placement = left
+			}
+			form asset_category
+			{
+				label placement = left
+			}
+			form asset_disposal
+			{
+				label placement = left
+			}
+			form asset_request
+			{
+				label placement = left
+			}
+			form maintenance_record
+			{
+				label placement = left
+			}
+			form maintenance_schedule
+			{
+				label placement = left
+			}
+			form vendor
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report asset_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+						datablock2
+						(
+		     				title = "Category"
+		     				related field = category
+							fields
+							(
+								category_name as "Category Name"
+								depreciation_rate as "Depreciation Rate"
+								useful_life as "Useful Life"
+								description as "Description"
+								is_active as "Is Active"
+							)
+						)
+						datablock3
+						(
+		     				title = "Vendor"
+		     				related field = vendor
+							fields
+							(
+								vendor_name as "Vendor Name"
+								contact_person as "Contact Person"
+								email as "Email Address"
+								phone as "Phone Number"
+								gst_number as "GST Number"
+								address as "Address"
+								vendor_rating as "Vendor Rating"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_by_location
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								asset_name as "Asset Name"
+								serial_number as "Serial Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_request_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								requested_by as "Requested By"
+								lab_section as "Lab Section"
+								category as "Category"
+								item_description as "Item Description"
+								quantity as "Quantity"
+								estimated_unit_cost as "Estimated Unit Cost"
+								priority as "Priority"
+								required_by as "Required By"
+								preferred_vendor as "Preferred Vendor"
+								justification as "Justification"
+								quotation as "Quotation"
+								approval_status as "Approval Status"
+								rejection_reason as "Rejection Reason"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								requested_by as "Requested By"
+								lab_section as "Lab Section"
+								category as "Category"
+								item_description as "Item Description"
+								quantity as "Quantity"
+								estimated_unit_cost as "Estimated Unit Cost"
+								priority as "Priority"
+								required_by as "Required By"
+								preferred_vendor as "Preferred Vendor"
+								justification as "Justification"
+								quotation as "Quotation"
+								approval_status as "Approval Status"
+								rejection_reason as "Rejection Reason"
+							)
+						)
+						datablock2
+						(
+		     				title = "Category"
+		     				related field = category
+							fields
+							(
+								category_name as "Category Name"
+								depreciation_rate as "Depreciation Rate"
+								useful_life as "Useful Life"
+								description as "Description"
+								is_active as "Is Active"
+							)
+						)
+						datablock3
+						(
+		     				title = "Preferred Vendor"
+		     				related field = preferred_vendor
+							fields
+							(
+								vendor_name as "Vendor Name"
+								contact_person as "Contact Person"
+								email as "Email Address"
+								phone as "Phone Number"
+								gst_number as "GST Number"
+								address as "Address"
+								vendor_rating as "Vendor Rating"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_request_by_priority
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								requested_by as "Requested By"
+								lab_section as "Lab Section"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								requested_by as "Requested By"
+								lab_section as "Lab Section"
+								category as "Category"
+								item_description as "Item Description"
+								quantity as "Quantity"
+								estimated_unit_cost as "Estimated Unit Cost"
+								priority as "Priority"
+								required_by as "Required By"
+								preferred_vendor as "Preferred Vendor"
+								justification as "Justification"
+								quotation as "Quotation"
+								approval_status as "Approval Status"
+								rejection_reason as "Rejection Reason"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report maintenance_record_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset as "Asset"
+								schedule as "Schedule"
+								maintenance_type as "Maintenance Type"
+								fault_description as "Fault Description"
+								technician as "Technician"
+								job_date as "Job Date"
+								downtime_hours as "Downtime Hours"
+								labour_cost as "Labour Cost"
+								parts_cost as "Parts Cost"
+								total_cost as "Total Cost"
+								job_status as "Job Status"
+								job_report as "Job Report"
+								approval_status as "Approval Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								asset as "Asset"
+								schedule as "Schedule"
+								maintenance_type as "Maintenance Type"
+								fault_description as "Fault Description"
+								technician as "Technician"
+								job_date as "Job Date"
+								downtime_hours as "Downtime Hours"
+								labour_cost as "Labour Cost"
+								parts_cost as "Parts Cost"
+								total_cost as "Total Cost"
+								job_status as "Job Status"
+								job_report as "Job Report"
+								approval_status as "Approval Status"
+							)
+						)
+						datablock2
+						(
+		     				title = "Asset"
+		     				related field = asset
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+						datablock3
+						(
+		     				title = "Schedule"
+		     				related field = schedule
+							fields
+							(
+								schedule_id as "Schedule ID"
+								asset as "Asset"
+								maintenance_type as "Maintenance Type"
+								frequency as "Frequency"
+								interval_days as "Interval in Days"
+								last_done_date as "Last Done Date"
+								next_due_date as "Next Due Date"
+								assigned_technician as "Assigned Technician"
+								schedule_status as "Schedule Status"
+								instructions as "Instructions"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report maintenance_record_by_job_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								technician as "Technician"
+								asset as "Asset"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset as "Asset"
+								schedule as "Schedule"
+								maintenance_type as "Maintenance Type"
+								fault_description as "Fault Description"
+								technician as "Technician"
+								job_date as "Job Date"
+								downtime_hours as "Downtime Hours"
+								labour_cost as "Labour Cost"
+								parts_cost as "Parts Cost"
+								total_cost as "Total Cost"
+								job_status as "Job Status"
+								job_report as "Job Report"
+								approval_status as "Approval Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_disposal_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset as "Asset"
+								reason as "Reason"
+								disposal_method as "Disposal Method"
+								book_value as "Book Value"
+								expected_scrap_value as "Expected Scrap Value"
+								disposal_date as "Disposal Date"
+								condition_report as "Condition Report"
+								approval_status as "Approval Status"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								asset as "Asset"
+								reason as "Reason"
+								disposal_method as "Disposal Method"
+								book_value as "Book Value"
+								expected_scrap_value as "Expected Scrap Value"
+								disposal_date as "Disposal Date"
+								condition_report as "Condition Report"
+								approval_status as "Approval Status"
+								remarks as "Remarks"
+							)
+						)
+						datablock2
+						(
+		     				title = "Asset"
+		     				related field = asset
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_disposal_by_reason
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								asset as "Asset"
+								disposal_method as "Disposal Method"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset as "Asset"
+								reason as "Reason"
+								disposal_method as "Disposal Method"
+								book_value as "Book Value"
+								expected_scrap_value as "Expected Scrap Value"
+								disposal_date as "Disposal Date"
+								condition_report as "Condition Report"
+								approval_status as "Approval Status"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_allocation_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								asset as "Asset"
+								allocated_to as "Allocated To"
+								lab_section as "Lab Section"
+								issue_date as "Issue Date"
+								expected_return_date as "Expected Return Date"
+								actual_return_date as "Actual Return Date"
+								allocation_status as "Allocation Status"
+								condition_on_return as "Condition On Return"
+								receiver_signature as "Receiver Signature"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								asset as "Asset"
+								allocated_to as "Allocated To"
+								lab_section as "Lab Section"
+								issue_date as "Issue Date"
+								expected_return_date as "Expected Return Date"
+								actual_return_date as "Actual Return Date"
+								allocation_status as "Allocation Status"
+								condition_on_return as "Condition On Return"
+								receiver_signature as "Receiver Signature"
+							)
+						)
+						datablock2
+						(
+		     				title = "Asset"
+		     				related field = asset
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report vendor_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								vendor_name as "Vendor Name"
+								contact_person as "Contact Person"
+								email as "Email Address"
+								phone as "Phone Number"
+								gst_number as "GST Number"
+								address as "Address"
+								vendor_rating as "Vendor Rating"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								vendor_name as "Vendor Name"
+								contact_person as "Contact Person"
+								email as "Email Address"
+								phone as "Phone Number"
+								gst_number as "GST Number"
+								address as "Address"
+								vendor_rating as "Vendor Rating"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report vendor_by_vendor_rating
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								contact_person as "Contact Person"
+								vendor_name as "Vendor Name"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								vendor_name as "Vendor Name"
+								contact_person as "Contact Person"
+								email as "Email Address"
+								phone as "Phone Number"
+								gst_number as "GST Number"
+								address as "Address"
+								vendor_rating as "Vendor Rating"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report maintenance_schedule_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								schedule_id as "Schedule ID"
+								asset as "Asset"
+								maintenance_type as "Maintenance Type"
+								frequency as "Frequency"
+								interval_days as "Interval in Days"
+								last_done_date as "Last Done Date"
+								next_due_date as "Next Due Date"
+								assigned_technician as "Assigned Technician"
+								schedule_status as "Schedule Status"
+								instructions as "Instructions"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								schedule_id as "Schedule ID"
+								asset as "Asset"
+								maintenance_type as "Maintenance Type"
+								frequency as "Frequency"
+								interval_days as "Interval in Days"
+								last_done_date as "Last Done Date"
+								next_due_date as "Next Due Date"
+								assigned_technician as "Assigned Technician"
+								schedule_status as "Schedule Status"
+								instructions as "Instructions"
+							)
+						)
+						datablock2
+						(
+		     				title = "Asset"
+		     				related field = asset
+							fields
+							(
+								asset_id as "Asset ID"
+								asset_name as "Asset Name"
+								category as "Category"
+								serial_number as "Serial Number"
+								vendor as "Vendor"
+								location as "Location"
+								purchase_date as "Purchase Date"
+								purchase_cost as "Purchase Cost"
+								warranty_expiry as "Warranty Expiry"
+								asset_condition as "Asset Condition"
+								asset_status as "Asset Status"
+								asset_tag as "Asset Tag"
+								remarks as "Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report maintenance_schedule_by_maintenance_type
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								assigned_technician as "Assigned Technician"
+								schedule_id as "Schedule ID"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								schedule_id as "Schedule ID"
+								asset as "Asset"
+								maintenance_type as "Maintenance Type"
+								frequency as "Frequency"
+								interval_days as "Interval in Days"
+								last_done_date as "Last Done Date"
+								next_due_date as "Next Due Date"
+								assigned_technician as "Assigned Technician"
+								schedule_status as "Schedule Status"
+								instructions as "Instructions"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report asset_category_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								category_name as "Category Name"
+								depreciation_rate as "Depreciation Rate"
+								useful_life as "Useful Life"
+								description as "Description"
+								is_active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								category_name as "Category Name"
+								depreciation_rate as "Depreciation Rate"
+								useful_life as "Useful Life"
+								description as "Description"
+								is_active as "Is Active"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Assets"
+					icon = "business-stock"
+					form  asset
+					{
+						icon = "ui-1-bold-add"
+					}
+					report asset_Report
+					{
+						icon = "travel-world"
+					}
+					report asset_by_location
+					{
+						icon = "location-pin-copy"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Asset Requests"
+					icon = "business-stock"
+					form  asset_request
+					{
+						icon = "ui-1-bold-add"
+					}
+					report asset_request_Report
+					{
+						icon = "travel-world"
+					}
+					report asset_request_by_priority
+					{
+						icon = "business-agenda"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Maintenance Records"
+					icon = "health-notebook"
+					form  maintenance_record
+					{
+						icon = "ui-1-bold-add"
+					}
+					report maintenance_record_Report
+					{
+						icon = "travel-world"
+					}
+					report maintenance_record_by_job_status
+					{
+						icon = "users-2-a-time"
+					}
+				}
+				section Section_5
+				{
+					displayname = "Asset Disposals"
+					icon = "business-handout"
+					form  asset_disposal
+					{
+						icon = "ui-1-bold-add"
+					}
+					report asset_disposal_Report
+					{
+						icon = "shopping-bitcoin"
+					}
+					report asset_disposal_by_reason
+					{
+						icon = "files-question"
+					}
+				}
+				section Section_6
+				{
+					displayname = "Asset Allocations"
+					icon = "business-money-coins"
+					form  asset_allocation
+					{
+						icon = "ui-1-bold-add"
+					}
+					report asset_allocation_Report
+					{
+						icon = "business-stock"
+					}
+				}
+				section Section_7
+				{
+					displayname = "Vendors"
+					icon = "shopping-shop-location"
+					form  vendor
+					{
+						icon = "ui-1-bold-add"
+					}
+					report vendor_Report
+					{
+						icon = "travel-world"
+					}
+					report vendor_by_vendor_rating
+					{
+						icon = "business-percentage-38"
+					}
+				}
+				section Section_8
+				{
+					displayname = "Maintenance Schedules"
+					icon = "travel-church"
+					form  maintenance_schedule
+					{
+						icon = "ui-1-bold-add"
+					}
+					report maintenance_schedule_Report
+					{
+						icon = "travel-world"
+					}
+					report maintenance_schedule_by_maintenance_type
+					{
+						icon = "tech-2-l-check"
+					}
+				}
+				section Section_9
+				{
+					displayname = "Asset Categories"
+					icon = "business-hierarchy-53"
+					form  asset_category
+					{
+						icon = "ui-1-bold-add"
+					}
+					report asset_category_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			new theme = 11
+			font = "poppins"
+			color options
+			{
+				color = "5"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
